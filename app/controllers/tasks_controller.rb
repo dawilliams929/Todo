@@ -1,8 +1,9 @@
 class TasksController < ApplicationController
   respond_to :json
+  respond_to :html, :only => [:index]
   
   def create
-    @task = Task.new(params[:task])
+    @task = Task.new(task_params)
     
     if @task.save
       render :json => @task
@@ -13,6 +14,15 @@ class TasksController < ApplicationController
 
   def index
     @tasks = Task.all
-    render :json => @tasks
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render :json => @tasks }
+    end
+  end
+  
+  private
+  
+  def task_params
+    params.require(:task).permit(:title)
   end
 end

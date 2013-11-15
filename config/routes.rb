@@ -1,3 +1,5 @@
 Todo::Application.routes.draw do
-  resources :tasks, :only => [:create, :index]
+  resources :tasks
+  
+  root :to => "tasks#index"
 end

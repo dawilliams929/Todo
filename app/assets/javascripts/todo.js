@@ -4,12 +4,23 @@ window.TD = {
   	Views: {},
   	Routers: {},
 
-	initialize: function ($rootEl, tasksData) {
+	initialize: function($sidebar, $content, tasksData) {
 		var tasks = new TD.Collections.Tasks(tasksData);
-
-	    // startup a router
-	    new TD.Routers.TasksRouter($rootEl, tasks);
-	    // begin listening for navigation events
-	    Backbone.history.start();
+		
+		this._installSidebar($sidebar, tasks);
+		
+		new TD.Routers.TasksRouter($content, tasks);
+		
+		Backbone.history.start();
+	},
+	
+	_installSidebar: function($sidebar, tasks) {
+		var that = this;
+		
+		var tasksListView = new TD.Views.TasksListView({
+			collection: tasks
+		});
+		
+		$sidebar.html(tasksListView.render().$el);
 	}
 };

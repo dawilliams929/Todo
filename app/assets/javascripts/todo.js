@@ -4,8 +4,12 @@ window.TD = {
   	Views: {},
   	Routers: {},
 
-  	initialize: function($rootEl, tasks) {
-		new TD.Routers.TasksRouter($rootEl, tasks);
-		Backbone.history.start();
-  	}
+	initialize: function ($rootEl, tasksData) {
+		var tasks = new TD.Collections.Tasks(tasksData);
+
+	    // startup a router
+	    new TD.Routers.TasksRouter($rootEl, tasks);
+	    // begin listening for navigation events
+	    Backbone.history.start();
+	}
 };

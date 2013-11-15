@@ -3,6 +3,7 @@
 //= require jquery_ujs
 //= require underscore
 //= require backbone
+//= require jquery.serializeJSON.min
 //
 // Your top-level namespace:
 //= require todo

@@ -15,7 +15,7 @@ TD.Views.NewTaskView = Backbone.View.extend({
 		var that = this;
 		
 		
-		var formData = $(event.currentTarget).parent().serializeJSON();
+		var formData = $(event.currentTarget).parent().serializeJSON(); // calling event.currentTarget only gets the submit button, but we want the entire form
 		var task = new TD.Models.Task(formData.task);
 		
 		that.collection.add(task);
